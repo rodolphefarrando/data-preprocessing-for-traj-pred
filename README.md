@@ -21,7 +21,5 @@ The trajectories are classified according to six different criteria:
 By static we mean a pedestrian travelling less than two meters during the twenty frames (8 seconds and so less than 0.25 m/s) provided by the data. 
 
 
-[//]: <> (![](/figure/0_biwi_md.png?raw=true "Type1"))
-
-<img src="/figure/0_biwi.pdf?raw=true" width="500">
+<img src="/figure/0_biwi_md.png?raw=true" width="1000">
 Example of type 1 trajectory.
