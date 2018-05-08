@@ -9,6 +9,13 @@ Trajectory prediction has now some state-of-art methods. A number of papers anal
 
 To have a better vizualistion of the trajectories and simplify learning, all of them are normalize. The first point is shifted towards the origin (0,0) and the trajectory is rotated such that the first segment (between first and second point) is pointing upwards:
 
+Before shift and rotation:
+
+<img src="/figure/avant_rot.png?raw=true" width="500">
+
+After shift and rotation:
+
+<img src="/figure/apres_rot.png?raw=true" width="500">
 
 
 The trajectories are classified according to six different criteria:
