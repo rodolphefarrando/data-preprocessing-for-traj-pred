@@ -37,7 +37,7 @@ Example of type 3 trajectory.
 
 Example of type 4 trajectory.
 
-<img src="/figure/22_biwi_md.png?raw=true" width="500">
+<img src="/figure/22_biwi_MD.png?raw=true" width="500">
 
 
 Example of type 5 trajectory.
