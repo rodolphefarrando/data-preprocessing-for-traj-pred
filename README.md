@@ -20,4 +20,5 @@ The trajectories are classified according to six different criteria:
 
 By static we mean a pedestrian travelling less than two meters during the twenty frames (8 seconds and so less than 0.25 m/s) provided by the data. 
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+![alt text | width=50](/figure/0_biwi_md.png?raw=true "Type1")
