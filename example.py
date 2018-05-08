@@ -1,8 +1,8 @@
+"""
+This script shows how to use the Representation class to create the new data files
+"""
+from Representation import *
 
-from myclass.Representation import *
-
-matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['text.latex.unicode'] = True
 
 
 ## Data importation
@@ -16,6 +16,7 @@ crowds3 = Representation('../data/train/crowds/crowds_zara03.txt',dataset='cr3')
 crowds4 = Representation('../data/train/crowds/students001.txt',dataset='cr4')
 crowds5 = Representation('../data/train/crowds/students003.txt',dataset='cr5')
 mot = Representation('../data/train/mot/PETS09-S2L1.txt',dataset='mot')
+
 
 ## Get trajectory type to put into the right folder
 for i in range(biwi.number_traj):
@@ -42,7 +43,3 @@ crowds3.writeTxt()
 crowds4.writeTxt()
 crowds5.writeTxt()
 mot.writeTxt()
-
-
-
-

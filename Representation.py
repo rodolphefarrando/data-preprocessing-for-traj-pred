@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib
-matplotlib.use("Agg")
+#matplotlib.use("Agg")
 from matplotlib.animation import FuncAnimation
 from matplotlib import animation, rc
 import matplotlib.pyplot as plt
@@ -119,12 +119,21 @@ class Representation:
 
         plt.plot(trajectory_i['x'], trajectory_i['y'], marker='+', label='Trajectory of interest')
         if len(interact_id) > 0:
+            ind_i = 0
             for w in interact_id:
+                ind_i += 1
                 plt.plot(interact['x'][interact['id'] == w], interact['y'][interact['id'] == w], color='k', alpha=0.6,
-                         marker='.', label='Interact') #
+                         marker='.', label='Interact %s'%ind_i)
         plt.legend()
-        plt.axis('equal')
-        plt.savefig('../apres_rot', bbox_inches='tight')
+        if max(trajectory_i['y'])>10:
+            plt.axis([(-max(trajectory_i['y'])-2)/2, (max(trajectory_i['y'])+2)/2, -1, max(trajectory_i['y'])+1])
+        elif max(interact['y'])>10:
+            plt.axis([(-max(interact['y'])-2)/ 2, (max(interact['y'])+ 2) / 2, -1, max(interact['y']) + 1])
+        else:
+            plt.axis([-5.5,5.5, -1,10])
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.savefig(r'../figure/{}_{}.pdf'.format(i, self.dataset), bbox_inches='tight')
         plt.show()
 
     def makeDynamicPlot(self, i):
@@ -133,25 +142,25 @@ class Representation:
         :return: display a dynamic plot with trajectory i and the interacting traj
         """
 
-        ## Initialization of the plot#
-        fig = plt.figure(figsize=(12, 7))
-        #lim_sup = max(max(a['x']), max(a['y'])) + 1
-        #lim_inf = min(min(a['x']), min(a['y'])) - 1
-        ax_past = plt.axes(xlim=(-5, 5), ylim=(-1, 9))
-        line, = ax_past.plot([], [], marker='+')
-
         # Previous interaction
         trajectory_i, interact = self.representation(i)
         id_tmp = self.interaction(i)
+
+        ## Initialization of the plot#
+        fig = plt.figure(figsize=(12, 7))
+        lim_sup = max(max(trajectory_i['y']), max(interact['y'])) + 1
+        ax1 = plt.axes(xlim=(-lim_sup/2, lim_sup/2), ylim=(-1, lim_sup))
+        line, = ax1.plot([], [], marker='+')
+
         surround={}
         for w in id_tmp:
             surround[w] = interact[interact['id'] == w]
             surround[w].index = range(len(surround[w]))
             tmp = surround[w][surround[w]['frameNb'] <= trajectory_i.loc[0, 'frameNb']]
             if len(tmp) > 3:
-                ax_past.plot(tmp.tail(4)['x'], tmp.tail(4)['y'], marker='.', color='k', alpha=0.6)
+                ax1.plot(tmp.tail(4)['x'], tmp.tail(4)['y'], marker='.', color='k', alpha=0.6)
             else:
-                ax_past.plot(tmp['x'], tmp['y'], marker='.', color='k', alpha=0.6)
+                ax1.plot(tmp['x'], tmp['y'], marker='.', color='k', alpha=0.6)
 
         # Creation of a dictionary with all interacting trajectories
         x_int, y_int = [], []
@@ -170,15 +179,15 @@ class Representation:
                 [k for k, x in enumerate((trajectory_i.loc[0, 'frameNb'] == dictio['tmp%s' % j]['frameNb'])) if x][0]
 
         ## Plot initialization #2
-        mar = ['o', '+', 'x']
-        col = ['k', 'b', 'r']
+        mar = ['o']
+        col = ['k']
         alph = [1, 1, 1]
         lines = []
         for index in range(1+ len(id_tmp)):
-            if index < 3:
-                lobj = ax_past.plot([], [], marker=mar[index], color=col[index], alpha=alph[index])[0]
+            if index < 1:
+                lobj = ax1.plot([], [], marker=mar[index], color=col[index], alpha=alph[index])[0]
             else:
-                lobj = ax_past.plot([], [], marker='.')[0]
+                lobj = ax1.plot([], [], marker='.')[0]
             lines.append(lobj)
 
         # Initialization
@@ -217,6 +226,8 @@ class Representation:
                 xlist.append(dictio['x%s' % j])
                 ylist.append(dictio['y%s' % j])
 
+            ax1.set_xlabel(label)
+
             for lnum, line in enumerate(lines):
                 line.set_data(xlist[lnum], ylist[lnum])  # set data for each line separately.
 
@@ -228,7 +239,7 @@ class Representation:
         # Save animation
         Writer = animation.writers['imagemagick']
         writer = Writer()
-        anim.save('../test%s.gif'%i, writer=writer, dpi=128)
+        anim.save(r'../figure/dyn_{}_{}.gif'.format(i, self.dataset), writer=writer, dpi=128)
 
     def totalDistance(self,i):
         """
@@ -297,7 +308,6 @@ class Representation:
             count[i]=0
             index_list[i]=[]
 
-        ## Improve codes by reducing size
         for key in self.traj_type:
             for i in range(1,7):
                 if self.traj_type[key]==i:
@@ -329,58 +339,19 @@ class Representation:
                                fmt=['%d', '%d', '%.8f', '%.8f'])
 
 
-#**************************************************************************
-#Linear prediction to put in another class
-#    def linearPrediction(self,a):
-#        ### Linear prediction
-#        mid = np.around(len(a) / 2)
-#        a_past = a.loc[0:mid, :]
-#        a_pred = a.loc[mid:, :]
-#
-#        if (a_past['x'][len(a_past) - 1] - a_past['x'][len(a_past) - 2]) == 0:
-#            x_lin = a_past['x'][len(a_past) - 1] * np.ones(len(a_pred))
-#            diff = a_past['y'][len(a_past) - 1] - a_past['y'][len(a_past) - 2]
-#            y_lin = range(len(a_pred)) * diff + a_past['y'][len(a_past) - 1]
-#        else:
-#            slope = (a_past['y'][len(a_past) - 1] - a_past['y'][len(a_past) - 2]) / (
-#            a_past['x'][len(a_past) - 1] - a_past['x'][len(a_past) - 2])
-#            ordor = a_past['y'][len(a_past) - 1] - slope * a_past['x'][len(a_past) - 1]
-#            diff = a_past['x'][len(a_past) - 1] - a_past['x'][len(a_past) - 2]
-#            x_lin = range(len(a_pred)) * diff + a_past['x'][len(a_past) - 1]
-#            y_lin = slope * x_lin + ordor
-#
-#        return x_lin,y_lin
-#**************************************************************************
+    def dataAugmentation(self,i):
+        """
 
-# **************************************************************************
-#    def error(self,i):
-#        a = self.data[self.data['id']==self.unique_id[i]]
-#        a.index = range(len(a))
-#        mid = np.around(len(a) / 2)
-#        groundTruth = a.loc[mid:, :]
-#        if self.methode=='Linear':
-#            x_pred, y_pred = self.linearPrediction(a)
-#        elif self.methode=='Dcm':
-#            x_pred, y_pred = self.linearPrediction(a)
-#        else:
-#            print('No methods defined ==> No prediciton')
-#            x_pred, y_pred = [], []
-#            return
-#        ## MSE
-#        self.av_disp_err = np.append(self.av_disp_err,sum(((groundTruth['y'] - y_pred) ** 2
-#                                                        + (groundTruth['x'] - x_pred) ** 2)) / (len(groundTruth)))
-#        ## Final displacement
-#        self.fin_disp_err = np.append(self.fin_disp_err,sum((groundTruth['y'].tail(1) - y_pred[-1]) ** 2
-#                                                        + (groundTruth['x'].tail(1) - x_pred[-1]) ** 2))
-#**************************************************************************
+        :param i: write a txt file in the folder with the right type
+        :return: Create a new trajectory with noise.
+        """
+        print('To be completed')
+        return 0
 
-# **************************************************************************
-### To use in an another class for prediction
-#if self.methode=='Linear':
-# #    x_pred, y_pred = self.linearPrediction(a)
-#elif self.methode=='Dcm':
-#    x_pred, y_pred = self.linearPrediction(a)
-#else:
-#    print('No methods defined ==> No prediciton')
-#    x_pred, y_pred = [], []
-#**************************************************************************
+    def speed(self):
+        """
+
+        :return: Add speed to the data if necessary
+        """
+        print('To be completed')
+        return 0
