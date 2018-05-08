@@ -1,5 +1,5 @@
 
-from myclass.Representation import *
+from Representation import *
 
 matplotlib.rcParams['text.usetex'] = True
 matplotlib.rcParams['text.latex.unicode'] = True
