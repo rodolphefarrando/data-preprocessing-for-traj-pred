@@ -15,7 +15,7 @@ Before shift and rotation:
 
 After shift and rotation:
 
-<img src="/figure/apres_rot.png?raw=true" width="500">
+<img src="/figure/apres_rots.png?raw=true" width="500">
 
 
 
