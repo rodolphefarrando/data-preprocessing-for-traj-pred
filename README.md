@@ -7,6 +7,10 @@ Secondary goal: create new data by adding noise to the trajectories and create n
 
 Trajectory prediction has now some state-of-art methods. A number of papers analyses the accuracy of those methods. (Add references and talk about the methods ?). Beyond their respective performance, there is always some cases for which the methods are struggling with the prediction. The idea is to separate trajectories by type, that is the way the pedestrian is moving and the way her/his environment interacts with her/him.
 
+To have a better vizualistion of the trajectories and simplify learning, all of them are normalize. The first point is shifted towards the origin (0,0) and the trajectory is rotated such that the first segment (between first and second point) is pointing upwards:
+
+
+
 The trajectories are classified according to six different criteria:
 1. static trajectory without interaction
 1. static trajectory with static interaction
@@ -49,4 +53,6 @@ Example of type 6 trajectory.
 
 To better see the interaction between trajectories a dynamic plot is also implemented. It creates a .gif file that makes trajectories appear depending on the frame. The following gif shows the same figure as type 6 trajectory dynamically:
 
-![Alt Text](/figure/dyn_120_biwi.gif?raw=true)
+<img src="/figure/dyn_120_biwi.gif?raw=true" width="500">
+
+
