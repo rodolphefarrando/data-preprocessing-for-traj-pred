@@ -5,9 +5,9 @@ Main goal: To create a separate file for each trajectory and the trajectories th
 
 Secondary goal: create new data by adding noise to the trajectories and create new columns with new features like speed.
 
-Trajectory prediction has now some state-of-art methods. A number of papers analyses the accuracy of those methods. (Add references and talk about the methods ?). Beyond their respective performance, there is always some cases for which the methods are struggling with the prediction. The idea is to separate trajectories by type, that is the way the pedestrian is moving and the way her/his environment interacts with her/him.
+Trajectory prediction has now some state-of-art methods. Several papers analyses the accuracy of those methods. (Add references and talk about the methods ?). Beyond their respective performance, there is always some cases for which the methods are struggling with the prediction. The idea is to separate trajectories by type, that is the way the pedestrian is moving and the way her/his environment interacts with her/him.
 
-To have a better vizualistion of the trajectories and simplify learning, all of them are normalize. The first point is shifted towards the origin (0,0) and the trajectory is rotated such that the first segment (between first and second point) is pointing upwards:
+To have a better visualization of the trajectories and simplify learning, all of them are normalized. The first point is shifted towards the origin (0,0) and the trajectory is rotated such that the first segment (between first and second point) is pointing upwards:
 
 Before shift and rotation:
 
