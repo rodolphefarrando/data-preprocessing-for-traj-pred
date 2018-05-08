@@ -18,6 +18,7 @@ After shift and rotation:
 <img src="/figure/apres_rot.png?raw=true" width="500">
 
 
+
 The trajectories are classified according to six different criteria:
 1. static trajectory without interaction
 1. static trajectory with static interaction
