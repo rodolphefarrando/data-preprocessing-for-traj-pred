@@ -1,8 +1,8 @@
 """
 This script shows how to use the Representation class to create the new data files
 """
-from Representation import *
 
+from Representation import *
 
 
 ## Data importation
