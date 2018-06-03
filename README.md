@@ -61,6 +61,8 @@ For the direction classification, three criteria are defined:
 1. linear trajectory
 1. non-linear trajectory
 
+Static trajectories are defined the same way as for the previous classification. To know if a trajectory is linear or not, we only look at the last 10 coordinates, that is the coordinates we need to predict. In those coordinates, if the pedestrian makes a change of direction greater than 20°, then the trajectory is considered as non linear, otherwise it is linear.
+
 Example of type 2 trajectory.
 
 <img src="/figure/linear_md.png?raw=true" width="500">
