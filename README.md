@@ -11,11 +11,11 @@ To have a better visualization of the trajectories and simplify learning, all of
 
 Before shift and rotation:
 
-<img src="/figure/avant_rot.png?raw=true" width="500">
+<img src="/figure/beforerot.png?raw=true" width="500">
 
 After shift and rotation:
 
-<img src="/figure/apres_rots.png?raw=true" width="500">
+<img src="/figure/afterrot.png?raw=true" width="500">
 
 
 Two ways of classification are possible for the trajectories. The first one focuses more on interactions around the trajectory of interest, while the second one focuses on the direction of the trajectory.
