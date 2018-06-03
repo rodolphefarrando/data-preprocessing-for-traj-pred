@@ -23,7 +23,7 @@ class Representation:
         self.data = pd.read_csv(path, header = None, names = ['frameNb','id', 'x','y'],delimiter=' ')
         self.method = method
         self.dataset = dataset
-        self.unique_id = np.unique(np.array(self.data['id']))
+        self.unique_id = np.unique(np.array(self.data['id'])).ravel()
         self.number_traj = len(self.unique_id)
         self.traj_type = {}
 
@@ -127,8 +127,9 @@ class Representation:
         plt.legend()
         if max(trajectory_i['y'])>10:
             plt.axis([(-max(trajectory_i['y'])-2)/2, (max(trajectory_i['y'])+2)/2, -1, max(trajectory_i['y'])+1])
-        elif max(interact['y'])>10:
-            plt.axis([(-max(interact['y'])-2)/ 2, (max(interact['y'])+ 2) / 2, -1, max(interact['y']) + 1])
+        elif len(interact_id)>0:
+            if max(interact['y']) > 10:
+                plt.axis([(-max(interact['y'])-2)/ 2, (max(interact['y'])+ 2) / 2, -1, max(interact['y']) + 1])
         else:
             plt.axis([-5.5,5.5, -1,10])
         plt.xlabel('x')
@@ -345,8 +346,23 @@ class Representation:
         :param i: write a txt file in the folder with the right type
         :return: Create a new trajectory with noise.
         """
-        print('To be completed')
-        return 0
+        trajectory_i, interact = self.representation(i)
+        noise_x = np.random.rand(len(trajectory_i)-1)/10
+        noise_y = np.random.rand(len(trajectory_i)-1)/10
+        id_tmp = self.unique_id[-1] + 1
+        np.append(self.unique_id,id_tmp)
+        df = pd.DataFrame()
+        df['frameNb'] = np.array(trajectory_i['frameNb'])
+        df['id'] = self.unique_id[-1]
+        df['x']=np.zeros(len(trajectory_i))
+        df.loc[1:,'x'] = np.array(trajectory_i.loc[1:,'x']) + noise_x
+        df['x'] = np.zeros(len(trajectory_i))
+        df.loc[1:,'y'] = np.array(trajectory_i.loc[1:,'y']) + noise_y
+        self.data.append(df,ignore_index=True)
+        if len(self.traj_type)!=0:
+            self.traj_type[len(self.number_traj)]= self.traj_type[i]
+
+        self.number_traj+=1
 
     def speed(self):
         """
