@@ -28,12 +28,12 @@ By static we mean a pedestrian traveling less than two meters during the twenty 
 
 Example of type 1 trajectory.
 
-<img src="/figure/0_biwi_md.png?raw=true" width="500">
+<img src="/figure/6_biwi_md.png?raw=true" width="500">
 
 
 Example of type 2 trajectory.
 
-<img src="/figure/6_biwi_md.png?raw=true" width="500">
+<img src="/figure/0_biwi_md.png?raw=true" width="500">
 
 
 Example of type 3 trajectory.
