@@ -73,6 +73,6 @@ Example of type 3 trajectory.
 
 To better see the interaction between trajectories a dynamic plot is also implemented. It creates a .gif file that makes trajectories appear depending on the frame. The following gif shows the same figure as type 6 trajectory dynamically:
 
-<img src="/figure/dyn_120_biwi.gif?raw=true" width="500">
+<img src="/figure/dyn_120_biwi.gif?raw=true" width="700">
 
 
