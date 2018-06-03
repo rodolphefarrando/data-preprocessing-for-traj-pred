@@ -61,7 +61,13 @@ For the direction classification, three criteria are defined:
 1. linear trajectory
 1. non-linear trajectory
 
+Example of type 2 trajectory.
 
+<img src="/figure/linear_md.png?raw=true" width="500">
+
+Example of type 3 trajectory.
+
+<img src="/figure/non_linear_md.png?raw=true" width="500">
 
 To better see the interaction between trajectories a dynamic plot is also implemented. It creates a .gif file that makes trajectories appear depending on the frame. The following gif shows the same figure as type 6 trajectory dynamically:
 
