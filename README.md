@@ -18,8 +18,9 @@ After shift and rotation:
 <img src="/figure/apres_rots.png?raw=true" width="500">
 
 
+Two ways of classification are possible for the trajectories. The first one focuses more on interactions around the trajectory of interest, while the second one focuses on the direction of the trajectory.
 
-The trajectories are classified according to six different criteria:
+For the interaction classification, six different criteria are possible for the trajectories:
 1. static trajectory without interaction
 1. static trajectory with static interaction
 1. static trajectory with dynamic interaction
@@ -57,6 +58,15 @@ Example of type 5 trajectory.
 Example of type 6 trajectory.
 
 <img src="/figure/120_biwi_md.png?raw=true" width="500">
+
+For the direction classification, three criteria are defined:
+
+1. static trajectory
+1. linear trajectory
+1. non-linear trajectory
+
+
+
 
 
 To better see the interaction between trajectories a dynamic plot is also implemented. It creates a .gif file that makes trajectories appear depending on the frame. The following gif shows the same figure as type 6 trajectory dynamically:
